@@ -4,23 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.Job
 
 typealias Inflater<B> = (LayoutInflater, ViewGroup?, Boolean) -> B
 
 abstract class BaseFragment<
-        STATE : ViewState, INTENT : ViewIntent, ACTION : ViewAction,
+        STATE : ViewState, INTENT : ViewIntent, ACTION : ViewAction, EVENT : ViewEvent,
         B : ViewBinding,
-        VM : BaseViewModel<STATE, INTENT, ACTION>>
+        VM : BaseViewModel<STATE, INTENT, ACTION, EVENT>>
     (
     private val inflater: Inflater<B>,
     private val vmClass: Class<VM>
-) : Fragment(), Render<STATE> {
+) : Fragment(), Render<STATE>, React<EVENT> {
 
     private var _binding: B? = null
     protected val binding by lazy(LazyThreadSafetyMode.NONE) {
@@ -32,21 +31,31 @@ abstract class BaseFragment<
         ViewModelProvider(this, factory())[vmClass]
     }
 
+    private var eventJob: Job? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = inflater(inflater, container, false)
-        return _binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect(::render)
         }
+        eventJob = lifecycleScope.launchWhenStarted {
+            viewModel.event.collect(::react)
+        }
+    }
+
+    protected fun dispatchIntent(intent: INTENT) = viewModel.dispatchIntent(intent)
+
+    override fun onStop() {
+        eventJob?.cancel()
+        super.onStop()
     }
 
     override fun onDestroyView() {

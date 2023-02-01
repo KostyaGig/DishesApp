@@ -7,7 +7,7 @@ import ru.zinoviewk.dishesapp.data.cloud.CloudDish
 fun CloudDish.toDataDish() = DataDish(
     id = id,
     name = name,
-    description =description ?: "",
+    description = description ?: "",
     image = image ?: "",
     price
 )
@@ -17,7 +17,7 @@ fun DataDish.toCacheDish() = CacheDish(
     name = name,
     description = description,
     image = image,
-    price =price
+    price = price
 )
 
 fun CacheDish.toDataDish() = DataDish(
@@ -25,5 +25,5 @@ fun CacheDish.toDataDish() = DataDish(
     name = name,
     description = description,
     image = image,
-    price =price
+    price = price
 )

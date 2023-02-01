@@ -4,5 +4,13 @@ import ru.zinoviewk.dishesapp.presentation.core.ViewAction
 
 sealed class DishesAction : ViewAction {
 
-    object Empty : DishesAction()
+    object FetchDishes : DishesAction()
+
+    class SelectToDelete(val id: String) : DishesAction()
+
+    class ShowDetail(val id: String) : DishesAction()
+
+    object DeleteSelected : DishesAction()
+
+    object DeleteAll : DishesAction()
 }

@@ -1,11 +1,9 @@
 package ru.zinoviewk.dishesapp.domain.dishes.mapper
 
 import ru.zinoviewk.dishesapp.data.DataDish
-import ru.zinoviewk.dishesapp.data.cache.CacheDish
-import ru.zinoviewk.dishesapp.data.cloud.CloudDish
 import ru.zinoviewk.dishesapp.domain.dishes.DomainDish
 
-private const val MAX_DESC_LENGTH = 22
+private const val MAX_DESC_LENGTH = 55
 
 fun DataDish.toDomainDish() = DomainDish(
     id = id,

@@ -15,6 +15,7 @@ class DishesApplication : Application() {
         appComponent = DaggerAppComponent
             .builder()
             .context(this)
+            .resourceProvider(ResourceProviderImpl(this))
             .build()
     }
 

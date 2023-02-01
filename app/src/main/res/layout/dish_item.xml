@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:elevation="@dimen/dish_item_elevation"
+    app:cardElevation="@dimen/dish_item_elevation">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/dish_image_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/item_padding"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/dish_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/item_padding"
+            android:textStyle="bold"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/dish_price_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/item_padding"
+            tools:text="Price: 111" />
+
+        <TextView
+            android:id="@+id/dish_short_description_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/item_padding"
+            tools:text="The dish's short description..."
+            android:textSize="@dimen/description_short_size"/>
+
+        <CheckBox
+            android:id="@+id/remove_dish_chb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/remove_text"
+            tools:checked="true"
+            android:layout_margin="@dimen/dish_item_offset"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+

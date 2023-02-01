@@ -4,5 +4,13 @@ import ru.zinoviewk.dishesapp.presentation.core.ViewIntent
 
 sealed class DishesIntent : ViewIntent {
 
-    object Empty : DishesIntent()
+    object LoadAllDishes : DishesIntent()
+
+    class SelectToRemove(val id: String): DishesIntent()
+
+    object RemoveSelected : DishesIntent()
+
+    object RemoveAll : DishesIntent()
+
+    class ShowDetail(val id: String) : DishesIntent()
 }

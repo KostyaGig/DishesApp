@@ -1,6 +1,7 @@
 package ru.zinoviewk.dishesapp.presentation.di.dishes
 
 import dagger.Component
+import ru.zinoviewk.dishesapp.core.NetworkConnection
 import ru.zinoviewk.dishesapp.presentation.di.core.AppComponent
 import ru.zinoviewk.dishesapp.presentation.di.dishes.domain.DomainDishesModule
 import ru.zinoviewk.dishesapp.presentation.di.dishes.ui.UiDishesModule
@@ -13,10 +14,8 @@ import javax.inject.Scope
     dependencies = [AppComponent::class]
 )
 interface DishesComponent {
-
     fun inject(fragment: DishesFragment)
 }
 
 @Scope
-@Retention(AnnotationRetention.RUNTIME)
 annotation class DishesFeature

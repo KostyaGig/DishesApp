@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_padding">12dp</dimen>
+    <dimen name="dish_item_elevation">16dp</dimen>
+    <dimen name="dish_item_offset">12dp</dimen>
+    <dimen name="dish_detail_offset">12dp</dimen>
+    <dimen name="dish_detail_corner_radius">8dp</dimen>
+    <dimen name="dishes_error_tv_size">16sp</dimen>
+    <dimen name="description_full_size">20sp</dimen>
+    <dimen name="description_short_size">14sp</dimen>
+</resources>

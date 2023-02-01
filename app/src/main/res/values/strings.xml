@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">DishesApp</string>
+    <string name="remove_selected_text">Remove selected dishes</string>
+    <string name="remove_all_text">Remove all</string>
+    <string name="remove_text">Remove</string>
+    <string name="refresh_text">Refresh</string>
+    <string name="no_connection_error">You\'re offline!</string>
+    <string name="empty_dishes_error">There are no dishes in the database, please, refresh</string>
 </resources>

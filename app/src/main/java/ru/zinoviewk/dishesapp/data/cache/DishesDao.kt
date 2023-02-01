@@ -23,4 +23,10 @@ interface DishesDao {
 
     @Query("delete from Dishes where dishId like :id")
     suspend fun deleteDish(id: String)
+
+    @Query("delete from Dishes where dishId in (:ids)")
+    suspend fun deleteDishes(ids: List<String>)
+
+    @Query("delete from Dishes")
+    suspend fun deleteAllDishes()
 }
