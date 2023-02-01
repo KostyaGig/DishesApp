@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/dishes_fragment">
+
+    <fragment
+        android:id="@+id/dishes_fragment"
+        android:name="ru.zinoviewk.dishesapp.presentation.dishes.DishesFragment"
+        tools:layout="@layout/dishes_fragment"
+        android:label="DishesFragment"
+        >
+        <action
+            android:id="@+id/action_dishes_fragment_to_dish_detail_fragment"
+            app:destination="@id/dish_detail_fragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/dish_detail_fragment"
+        android:name="ru.zinoviewk.dishesapp.presentation.dish_detail.DishDetailFragment"
+        android:label="DishDetailFragment"
+        tools:layout="@layout/dish_detail_fragment">
+
+        <argument
+            android:name="dish_id"
+            android:defaultValue=""
+            app:argType="string"
+            />
+
+    </fragment>
+</navigation>
