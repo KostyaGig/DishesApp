@@ -6,4 +6,5 @@
     <string name="refresh_text">Refresh</string>
     <string name="no_connection_error">You\'re offline!</string>
     <string name="empty_dishes_error">There are no dishes in the database, please, refresh</string>
+    <string name="price_text">Price: %d</string>
 </resources>

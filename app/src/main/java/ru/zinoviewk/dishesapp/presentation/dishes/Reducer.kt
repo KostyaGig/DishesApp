@@ -10,7 +10,7 @@ fun DishesDomainResult.reduce(resourceProvider: ResourceProvider): DishesState {
 
         is DishesDomainResult.Loading -> DishesState.Progress
         is DishesDomainResult.Dishes -> {
-            val dishItems: List<DishRecyclerItem> = this.dishes.map { domainDish -> domainDish.toDishItem() }
+            val dishItems: List<DishRecyclerItem> = this.dishes.map { domainDish -> domainDish.toDishItem(resourceProvider) }
             val removeSelectedDishesItem = DishRecyclerItem.RemoveSelected(isEnabled = false)
             val removeAllDishesItem = DishRecyclerItem.RemoveAll
 

@@ -5,12 +5,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import ru.zinoviewk.dishesapp.core.ResourceProvider
 import ru.zinoviewk.dishesapp.domain.detail_dish.DishDetailUseCase
 import ru.zinoviewk.dishesapp.presentation.core.*
 
 class DishDetailViewModel(
     id: String,
-    private val useCase: DishDetailUseCase
+    private val useCase: DishDetailUseCase,
+    private val resourceProvider: ResourceProvider
 ) : BaseViewModel<DishDetailState, DishDetailIntent, DishDetailAction, ViewEvent>(DishDetailState.Progress) {
 
     init {
@@ -25,7 +27,7 @@ class DishDetailViewModel(
             require(action is DishDetailAction.FetchDish)
             useCase(action.id)
                 .flowOn(Dispatchers.IO)
-                .collectLatest { result -> _state.tryEmit(result.reduce()) }
+                .collectLatest { result -> _state.tryEmit(result.reduce(resourceProvider)) }
         }
     }
 }

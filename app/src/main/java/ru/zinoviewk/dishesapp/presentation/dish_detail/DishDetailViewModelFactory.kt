@@ -5,17 +5,18 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import ru.zinoviewk.dishesapp.core.ResourceProvider
 import ru.zinoviewk.dishesapp.domain.detail_dish.DishDetailUseCase
-import javax.inject.Named
 
 class DishDetailViewModelFactory @AssistedInject constructor(
     @Assisted("dishId") private val dishId: String,
-    private val useCase: DishDetailUseCase
+    private val useCase: DishDetailUseCase,
+    private val resourceProvider: ResourceProvider
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         require(modelClass == DishDetailViewModel::class.java)
-        return DishDetailViewModel(dishId, useCase) as T
+        return DishDetailViewModel(dishId, useCase, resourceProvider) as T
     }
 
     @AssistedFactory
