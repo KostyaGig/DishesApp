@@ -7,4 +7,13 @@
     <string name="no_connection_error">You\'re offline!</string>
     <string name="empty_dishes_error">There are no dishes in the database, please, refresh</string>
     <string name="price_text">Price: %d</string>
+    <string name="title_activity_room">RoomActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

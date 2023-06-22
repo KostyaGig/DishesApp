@@ -8,4 +8,5 @@
     <dimen name="dishes_error_tv_size">16sp</dimen>
     <dimen name="description_full_size">20sp</dimen>
     <dimen name="description_short_size">14sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

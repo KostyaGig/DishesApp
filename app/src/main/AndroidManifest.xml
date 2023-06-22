@@ -6,8 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
         android:name=".core.DishesApplication"
+        android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -17,13 +17,22 @@
         android:theme="@style/Theme.DishesApp"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.core.MainActivity"
-            android:exported="true">
+            android:name=".presentation.room.RoomActivity"
+            android:exported="true"
+            android:label="@string/title_activity_room"
+            android:theme="@style/Theme.DishesApp.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".presentation.core.MainActivity"
+            android:exported="true">
+
 
             <meta-data
                 android:name="android.app.lib_name"

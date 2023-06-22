@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
 
 typealias Inflater<B> = (LayoutInflater, ViewGroup?, Boolean) -> B
 
@@ -31,8 +31,6 @@ abstract class BaseFragment<
         ViewModelProvider(this, factory())[vmClass]
     }
 
-    private var eventJob: Job? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,19 +42,17 @@ abstract class BaseFragment<
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         lifecycleScope.launchWhenStarted {
-            viewModel.state.collect(::render)
+            viewModel.state.collectLatest {
+                render(it)
+            }
         }
-        eventJob = lifecycleScope.launchWhenStarted {
+
+        lifecycleScope.launchWhenStarted {
             viewModel.event.collect(::react)
         }
     }
 
     protected fun dispatchIntent(intent: INTENT) = viewModel.dispatchIntent(intent)
-
-    override fun onStop() {
-        eventJob?.cancel()
-        super.onStop()
-    }
 
     override fun onDestroyView() {
         _binding = null

@@ -25,17 +25,23 @@ class DishesUseCaseImpl @Inject constructor(
                 .fetchDishesFromNetworkAndSave()
                 .map { dataDishes -> dataDishes.map { dataDish -> dataDish.toDomainDish() } }
                 .onEach { dishes ->
-                    if (dishes.isEmpty()) emit(DishesDomainResult.EmptyDishes)
-                    else emit(DishesDomainResult.Dishes(dishes))
+                    if (dishes.isEmpty())
+                        emit(DishesDomainResult.EmptyDishes)
+                    else
+                        emit(DishesDomainResult.Dishes(dishes))
                 }.collect()
         } else {
             dishesRepository
                 .fetchDishesFromCache()
                 .map { dataDishes -> dataDishes.map { dataDish -> dataDish.toDomainDish() } }
                 .onEach { dataDishes ->
-                    if (dataDishes.isEmpty()) emit(DishesDomainResult.NoConnection)
-                    else emit(DishesDomainResult.Dishes(dataDishes))
+                    if (dataDishes.isEmpty())
+                        emit(DishesDomainResult.NoConnection)
+                    else
+                        emit(DishesDomainResult.Dishes(dataDishes))
                 }.collect()
         }
     }
+
+
 }

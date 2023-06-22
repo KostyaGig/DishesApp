@@ -116,6 +116,8 @@ class DishesAdapter(
         }
     }
 
+
+    // also checks if the elements' position was changed
     private class Callback : DiffUtil.ItemCallback<DishRecyclerItem>() {
         override fun areItemsTheSame(oldItem: DishRecyclerItem, newItem: DishRecyclerItem) : Boolean {
             return when {

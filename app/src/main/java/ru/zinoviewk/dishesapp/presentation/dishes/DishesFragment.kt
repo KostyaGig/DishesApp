@@ -1,10 +1,13 @@
 package ru.zinoviewk.dishesapp.presentation.dishes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.*
 import ru.zinoviewk.dishesapp.R
 import ru.zinoviewk.dishesapp.core.appComponent
 import ru.zinoviewk.dishesapp.databinding.DishesFragmentBinding
@@ -13,6 +16,8 @@ import ru.zinoviewk.dishesapp.presentation.di.dishes.DaggerDishesComponent
 import ru.zinoviewk.dishesapp.presentation.dish_detail.DISH_ID_KEY
 import ru.zinoviewk.dishesapp.presentation.dishes.recycler_view.DishItemDecorationOffset
 import ru.zinoviewk.dishesapp.presentation.dishes.recycler_view.DishesAdapter
+import java.util.*
+import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 
 
@@ -56,14 +61,33 @@ class DishesFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding.dishes) {
-            this.adapter = this@DishesFragment.adapter
-            itemAnimator = null
-            removeItemDecoration(offsetDecoration)
-            addItemDecoration(offsetDecoration)
+//        with(binding.dishes) {
+//            this.adapter = this@DishesFragment.adapter
+//            itemAnimator = null
+//            removeItemDecoration(offsetDecoration)
+//            addItemDecoration(offsetDecoration)
+//        }
+//
+//        binding.refreshBtn.setOnClickListener { dispatchIntent(DishesIntent.LoadAllDishes) }
+
+        val tasks = mutableListOf<Pair<Int, String>>()
+        val result = mutableListOf<Deferred<String>>()
+        val mapToRes = ConcurrentHashMap<Int, String>()
+        lifecycleScope.launch {
+            tasks.forEach {(id, input) ->
+                // non blocking task
+                async(Dispatchers.Default) {
+                    delay(100 * Random().nextInt(10).toLong())
+                    mapToRes[id] = input
+                    Log.d("zinoviewks", "result by $id was fetched")
+                    input
+                }.also(result::add)
+            }
+
+            Log.d("zinoviewks", "awaited all ${result.awaitAll()}")
+
         }
 
-        binding.refreshBtn.setOnClickListener { dispatchIntent(DishesIntent.LoadAllDishes) }
     }
 
     override fun react(event: DishesEvent) {

@@ -41,7 +41,7 @@ class DishesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun fetchDish(id: String): Flow<DataDish> {
-        return if (cacheDataSource.isEmpty()) {
+        return if (!cacheDataSource.isEmpty()) {
             cacheDataSource.fetchDish(id).map { cacheDish -> cacheDish.toDataDish() }
         } else {
             return flow { emit(cloudDataSource.fetchDish(id).toDataDish()) }
